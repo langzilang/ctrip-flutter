@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/content_pager.dart';
 //底部导航栏搭建
 class TabNavigator extends StatefulWidget {
   const TabNavigator({Key key}) : super(key: key);
@@ -11,6 +12,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.blueAccent;
   int _currentIndex = 0;
+  final ContentPagerController _contentPagerController = ContentPagerController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +26,23 @@ class _TabNavigatorState extends State<TabNavigator> {
           end: Alignment.bottomCenter,
           )
         ),
-        child: Center(
-          child: Text('您点击了第$_currentIndex个Tab',style: TextStyle(fontSize: 36,color: Colors.blueAccent),),
+        child: ContentPager(
+          contentPagerController: _contentPagerController,
+          onPageChanged: (int index){
+            setState(() {
+              _currentIndex = index;
+            });
+          },
         ),
+        // child: Center(
+        //   child: Text('您点击了第$_currentIndex个Tab',style: TextStyle(fontSize: 36,color: Colors.blueAccent),),
+        // ),
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index){
+            //控制内容区域滚动到指定位置
+            _contentPagerController.jumpToPage(index);
             //修改状态
             setState(() {
               _currentIndex = index;
