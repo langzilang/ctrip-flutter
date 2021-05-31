@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_app/custom_appbar.dart';
 
 class ContentPager extends StatefulWidget {
   final ValueChanged<int> onPageChanged;
@@ -28,6 +30,7 @@ class _ContentPagerState extends State<ContentPager> {
     if(widget.contentPagerController!=null){
       widget.contentPagerController._pageController = _pageController;
     }
+    _statusBar();
     super.initState();
   }
   @override
@@ -35,6 +38,7 @@ class _ContentPagerState extends State<ContentPager> {
     return Column(
       children: <Widget>[
         //appBar
+        CustomAppBar(),
         Expanded(
           //高度撑开，否则在Column中没有高度会报警
             child: PageView(
@@ -57,6 +61,19 @@ class _ContentPagerState extends State<ContentPager> {
         decoration: BoxDecoration(color: _colors[index]),
     ),
     );
+  }
+  //状态栏样式--沉浸式状态栏
+  _statusBar(){
+    //黑色沉浸式状态栏，基于SystemUiOverlayStyle.dark 修改了 statusBarColor
+    SystemUiOverlayStyle uiOverlayStyle = SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF000000),
+      systemNavigationBarDividerColor: null,
+      statusBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    );
+    SystemChrome.setSystemUIOverlayStyle(uiOverlayStyle);
   }
 }
 //内容区域控制器
