@@ -22,7 +22,7 @@ class _CardRecommendState extends BaseCaredState{
       margin: EdgeInsets.only(top: 20),
       child: Image.network(
         'https://z3.ax1x.com/2021/06/02/2MC8te.jpg',
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       ),
     ));
   }

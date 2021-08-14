@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/card_recommend.dart';
+import 'package:flutter_app/card_share.dart';
 import 'package:flutter_app/custom_appbar.dart';
 
 class ContentPager extends StatefulWidget {
